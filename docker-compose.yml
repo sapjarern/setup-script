@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+
+  db:
+    image: postgres:13.9
+    restart: always
+    container_name: db_con
+    environment:
+      - POSTGRES_USER=cm_sitearound
+      - POSTGRES_PASSWORD=1234567890
+      - POSTGRES_DB=CM
+    network_mode: "host"
+
+  pgadmin:
+    container_name: pg_con
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 5050
+    network_mode: "host"
+
+  redis:
+    image: redis
+    restart: always
+    container_name: redis_con
+    network_mode: "host"
+
+  mysql:
+    image: mysql:8.0.32
+    restart: always
+    container_name: mysql_con
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234567890
+    network_mode: "host"
+
+  adminer:
+    image: adminer
+    container_name: adminer_con
+    restart: always
+    network_mode: "host"
+
+  mongodb:
+    image: mongo:6.0.5
+    container_name: mongodb_con
+    restart: always
+    volumes:
+      - ./mg_data:/data/db
+    network_mode: "host"
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: rabbitmq_con
+    restart: always
+    network_mode: "host"
+
