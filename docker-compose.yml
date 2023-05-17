@@ -112,8 +112,8 @@ services:
     image: grafana/grafana:9.5.2
     restart: always
     volumes:
-      - ./service_data/grafana/config:/etc/grafana
-      - ./service_data/grafana/data:/var/lib/grafana
+      - ./service_data/grafana/config:/etc/grafana:rw
+      - ./service_data/grafana/data:/var/lib/grafana:rw
     network_mode: "host"
   
   portainer:
