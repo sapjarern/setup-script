@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=Init
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - postgres_data:/var/lib/postgresql/data/pgdata
+      - ./service_data/postgres/data:/var/lib/postgresql/data/pgdata
     network_mode: "host"
 
   mysql:
@@ -22,7 +22,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=1234567890
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./service_data/mysql/data:/var/lib/mysql
     network_mode: "host"
 
   mongodb:
@@ -33,7 +33,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=sitearound
       - MONGO_INITDB_ROOT_PASSWORD=1234567890
     volumes:
-      - mongo_data:/data/db
+      - ./service_data/mongo/data:/data/db
     network_mode: "host"
   
   influxdb:
@@ -46,7 +46,7 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG=SWD
       - DOCKER_INFLUXDB_INIT_BUCKET=Init
     volumes:
-      - influx_data:/var/lib/influxdb2
+      - ./service_data/influx/data:/var/lib/influxdb2
     network_mode: "host"
 
   redis:
@@ -64,7 +64,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin
       - PGADMIN_LISTEN_PORT=5050
     volumes:
-      - pg_data:/var/lib/pgadmin
+      - ./service_data/pg/data:/var/lib/pgadmin
     network_mode: "host"
 
   adminer:
@@ -104,7 +104,7 @@ services:
     image: louislam/uptime-kuma:1.21.3-alpine
     restart: always
     volumes:
-      - kuma_data:/app/data
+      - ./service_data/kuma/data:/app/data
     network_mode: "host"
 
   grafana:
@@ -112,8 +112,8 @@ services:
     image: grafana/grafana:9.5.2
     restart: always
     volumes:
-      - grafana_config:/etc/grafana/grafana.ini
-      - grafana_data:/var/lib/grafana
+      - ./service_data/grafana/config/grafana.ini:/etc/grafana/grafana.ini
+      - ./service_data/grafana/data:/var/lib/grafana
     network_mode: "host"
   
   portainer:
@@ -121,7 +121,7 @@ services:
     image: portainer/portainer-ce:2.18.2-alpine
     restart: always
     volumes:
-      - portainer_data:/data
+      - ./service_data/portainer/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     network_mode: "host"
   
@@ -146,76 +146,76 @@ services:
     environment:
       - PORT=4000
     volumes:
-      - dashy_config:/app/public/conf.yml
+      - ./service_data/dashy/config/conf.yml:/app/public/conf.yml
     network_mode: "host"
 
-volumes:
-  postgres_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/postgres/data
+# volumes:
+#   postgres_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/postgres/data
   
-  mysql_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/mysql/data
+#   mysql_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/mysql/data
     
-  mongo_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/mongo/data
+#   mongo_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/mongo/data
   
-  influx_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/influx/data
+#   influx_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/influx/data
   
-  pg_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/pg/data
+#   pg_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/pg/data
   
-  kuma_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/kuma/data
+#   kuma_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/kuma/data
   
-  grafana_config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/grafana/config/grafana.ini
+#   grafana_config:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/grafana/config/grafana.ini
 
-  grafana_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/grafana/data
+#   grafana_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/grafana/data
   
-  portainer_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/portainer/data
+#   portainer_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/portainer/data
   
-  dashy_config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./service_data/dashy/config/conf.yml
+#   dashy_config:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./service_data/dashy/config/conf.yml
