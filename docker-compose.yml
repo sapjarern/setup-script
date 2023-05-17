@@ -155,67 +155,67 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/postgres/data
+      device: ./service_data/postgres/data
   
   mysql_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/mysql/data
+      device: ./service_data/mysql/data
     
   mongo_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/mongo/data
+      device: ./service_data/mongo/data
   
   influx_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/influx/data
+      device: ./service_data/influx/data
   
   pg_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/pg/data
+      device: ./service_data/pg/data
   
   kuma_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/kuma/data
+      device: ./service_data/kuma/data
   
   grafana_config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/grafana/config/grafana.ini
+      device: ./service_data/grafana/config/grafana.ini
 
   grafana_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/grafana/data
+      device: ./service_data/grafana/data
   
   portainer_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/portainer/data
+      device: ./service_data/portainer/data
   
   dashy_config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/service_data/dashy/config/conf.yml
+      device: ./service_data/dashy/config/conf.yml
