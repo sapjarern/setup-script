@@ -81,7 +81,6 @@ services:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=sitearound
       - ME_CONFIG_MONGODB_ADMINPASSWORD=1234567890
       - ME_CONFIG_MONGODB_URL=mongodb://sitearound:1234567890@localhost:27017/
-      - PORT=8881
     network_mode: "host"
 
   redis-commander:
@@ -89,7 +88,8 @@ services:
     image: rediscommander/redis-commander:latest
     restart: always
     environment:
-      REDIS_HOSTS: local:localhost:6379
+      - PORT=8881
+      - REDIS_HOSTS=local:localhost:6379
     depends_on:
       - redis
     network_mode: "host"
@@ -113,7 +113,7 @@ services:
     image: grafana/grafana:9.5.2
     restart: always
     volumes:
-      - ./service_data/grafana/config:/etc/grafana:rw
+      - ./service_data/grafana/config/grafana.ini:/etc/grafana/grafana.ini:rw
       - ./service_data/grafana/data:/var/lib/grafana:rw
     network_mode: "host"
   
