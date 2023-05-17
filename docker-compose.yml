@@ -112,7 +112,7 @@ services:
     image: grafana/grafana:9.5.2
     restart: always
     volumes:
-      - ./service_data/grafana/config/grafana.ini:/etc/grafana/grafana.ini
+      - ./service_data/grafana/config:/etc/grafana
       - ./service_data/grafana/data:/var/lib/grafana
     network_mode: "host"
   
@@ -146,7 +146,7 @@ services:
     environment:
       - PORT=4000
     volumes:
-      - ./service_data/dashy/config/conf.yml:/app/public/conf.yml
+      - ./service_data/dashy/config:/app/public
     network_mode: "host"
 
 # volumes:
