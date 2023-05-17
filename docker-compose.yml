@@ -138,6 +138,16 @@ services:
     cap_add:
       - NET_ADMIN
     network_mode: "host"
+  
+  dashy:
+    container_name: dashy_con
+    image: lissy93/dashy:2.1.1
+    restart: always
+    environment:
+      - PORT=4000
+    volumes:
+      - dashy_config:/app/public/conf.yml
+    network_mode: "host"
 
 volumes:
   postgres_data:
@@ -202,3 +212,10 @@ volumes:
       type: none
       o: bind
       device: ${HOME}/service_data/portainer/data
+  
+  dashy_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/service_data/dashy/config/conf.yml
