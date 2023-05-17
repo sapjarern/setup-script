@@ -81,6 +81,7 @@ services:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=sitearound
       - ME_CONFIG_MONGODB_ADMINPASSWORD=1234567890
       - ME_CONFIG_MONGODB_URL=mongodb://sitearound:1234567890@localhost:27017/
+      - PORT=8881
     network_mode: "host"
 
   redis-commander:
