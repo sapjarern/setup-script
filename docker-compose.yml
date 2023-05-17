@@ -118,11 +118,25 @@ services:
   
   portainer:
     container_name: portainer_con
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ce:2.18.2-alpine
     restart: always
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: "host"
+  
+  pi-hole:
+    container_name: pi_hole_con
+    image: pihole/pihole:latest
+    restart: always
+    environment:
+      - TZ='Asia/Bangkok'
+      - WEBPASSWORD=Swd_12345
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN
     network_mode: "host"
 
 volumes:
