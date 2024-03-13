@@ -22,8 +22,9 @@ services:
       - 3000:3000
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel, grafana-worldmap-panel, volkovlabs-echarts-panel, gapit-htmlgraphics-panel
-    volumes:
-      - ./service_data/grafana/data:/var/lib/grafana:rw
+    #if you want to mount volume data uncomment this section and add user: "root" to contain config
+    #volumes:
+    #  - ./service_data/grafana/data:/var/lib/grafana:rw
     # network_mode: "host"
   
   mosquitto:
