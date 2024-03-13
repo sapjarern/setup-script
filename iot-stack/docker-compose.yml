@@ -1,0 +1,48 @@
+version: "3"
+
+# if you want to run service with host network comment ports section and uncomment network_mode
+services:
+  influxdb:
+    container_name: influxdb_con
+    image: influxdb:2.7-alpine
+    restart: unless-stopped
+    ports:
+      - 8086:8086
+    env_file:
+      - .env.influx
+    volumes:
+      - ./service_data/influx/data:/var/lib/influxdb2
+    # network_mode: "host"
+  
+  grafana:
+    container_name: grafana_con
+    image: grafana/grafana:10.3.1
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel, grafana-worldmap-panel, volkovlabs-echarts-panel, gapit-htmlgraphics-panel
+    volumes:
+      - ./service_data/grafana/data:/var/lib/grafana:rw
+    # network_mode: "host"
+  
+  mosquitto:
+    container_name: mosquitto_con
+    image: eclipse-mosquitto:2.0.18-openssl
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - "./service_data/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+    # network_mode: "host"
+  
+  node-red:
+    container_name: node_red_con
+    image: nodered/node-red:3.1.7
+    restart: unless-stopped
+    ports:
+      - 1880:1880
+    volumes:
+      - ./service_data/node-red/data:/data
+    # network_mode: "host"
