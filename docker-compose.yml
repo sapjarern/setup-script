@@ -7,9 +7,9 @@ services:
     image: postgres:13.9-alpine3.17
     restart: always
     environment:
-      - POSTGRES_USER=sitearound
-      - POSTGRES_PASSWORD=1234567890
-      - POSTGRES_DB=Init
+      - POSTGRES_USER=secret
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=secret
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - ./service_data/postgres/data:/var/lib/postgresql/data/pgdata
@@ -20,7 +20,7 @@ services:
     image: mysql:8.0.32
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=1234567890
+      - MYSQL_ROOT_PASSWORD=secret
     volumes:
       - ./service_data/mysql/data:/var/lib/mysql
     network_mode: "host"
@@ -30,8 +30,8 @@ services:
     image: mongo:6.0.5
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=sitearound
-      - MONGO_INITDB_ROOT_PASSWORD=1234567890
+      - MONGO_INITDB_ROOT_USERNAME=secret
+      - MONGO_INITDB_ROOT_PASSWORD=secret
     volumes:
       - ./service_data/mongo/data:/data/db
     network_mode: "host"
@@ -41,10 +41,10 @@ services:
     image: influxdb:2.6-alpine
     restart: always
     environment:
-      - DOCKER_INFLUXDB_INIT_USERNAME=sitearound
-      - DOCKER_INFLUXDB_INIT_PASSWORD=1234567890
-      - DOCKER_INFLUXDB_INIT_ORG=SWD
-      - DOCKER_INFLUXDB_INIT_BUCKET=Init
+      - DOCKER_INFLUXDB_INIT_USERNAME=secret
+      - DOCKER_INFLUXDB_INIT_PASSWORD=secret
+      - DOCKER_INFLUXDB_INIT_ORG=secret
+      - DOCKER_INFLUXDB_INIT_BUCKET=secret
     volumes:
       - ./service_data/influx/data:/var/lib/influxdb2
     network_mode: "host"
@@ -60,8 +60,8 @@ services:
     image: dpage/pgadmin4:7.1
     restart: always
     environment:
-      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
-      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_DEFAULT_EMAIL=secret
+      - PGADMIN_DEFAULT_PASSWORD=secret
       - PGADMIN_LISTEN_PORT=5050
     volumes:
       - ./service_data/pg/data:/var/lib/pgadmin
@@ -78,9 +78,9 @@ services:
     image: mongo-express:1.0.0-alpha
     restart: always
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=sitearound
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=1234567890
-      - ME_CONFIG_MONGODB_URL=mongodb://sitearound:1234567890@localhost:27017/
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=secret
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
+      - ME_CONFIG_MONGODB_URL=mongodb://secret:secret@localhost:27017/
     network_mode: "host"
 
   redis-commander:
@@ -132,7 +132,7 @@ services:
     restart: always
     environment:
       - TZ='Asia/Bangkok'
-      - WEBPASSWORD=Swd_12345
+      - WEBPASSWORD=secret
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'
